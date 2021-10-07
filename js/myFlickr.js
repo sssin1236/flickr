@@ -37,8 +37,11 @@ $.ajax({
 
     $(items).each(function(index,data){
 
+        //변수 text에 이미지 데이터의 title을 담음
         let text = data.title;
+        //만약 해당 이미지 데이터에 제목 텍스트가 없다면
         if(!data.title){
+            //변수 text에 임의의 텍스트를 저장하여 추후 발생할 수 있는 오류 방지
             text = "No description in this photo";
         }
 
@@ -46,7 +49,27 @@ $.ajax({
             .append(
                 $("<li>")
                     .append(
+                        $("<a>").attr({
+                            href : "https://live.staticflickr.com/"+data.server+"/"+data.id+"_"+data.secret+"_b.jpg"
+                        })
+                        .append(
+                            $("<img>").attr({
+                                src : "https://live.staticflickr.com/"+data.server+"/"+data.id+"_"+data.secret+"_m.jpg"
+                            })
+                        )
+                    )
+                    .append(
                         $("<p>").text(text)
+                    )
+                    //이미지를 올린 사용자 프로필 이미지와 이름 출력
+                    .append(
+                        $("<div class='profile'>")
+                            .append(
+                                $("<img>").attr({
+                                    src : "https://www.flickr.com/buddyicons/"+data.owner+".jpg"
+                                }),
+                                $("<span>").text(data.owner)
+                            )
                     )
             )
     });
