@@ -30,7 +30,26 @@ $.ajax({
     }
 })
 .success(function(data){
-    console.log(data);
+    console.log(data.photos.photo);
+    let items = data.photos.photo;
+
+    $("#gallery").append(("<ul>"));
+
+    $(items).each(function(index,data){
+
+        let text = data.title;
+        if(!data.title){
+            text = "No description in this photo";
+        }
+
+        $("#gallery ul")
+            .append(
+                $("<li>")
+                    .append(
+                        $("<p>").text(text)
+                    )
+            )
+    });
 })
 .error(function(err){
     console.err("데이터를 호출하는 데 실패했습니다.");
