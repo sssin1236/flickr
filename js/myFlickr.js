@@ -77,3 +77,22 @@ $.ajax({
 .error(function(err){
     console.err("데이터를 호출하는 데 실패했습니다.");
 })
+
+//리스트의 버튼 클릭했을 때 레이어 팝업으로 큰 이미지 출력하기
+$("body").on("click", "#gallery ul li", function(e){
+    e.preventDefault();
+
+    let imgSrc = $(this).children("a").attr("href");
+
+    $("body").append(
+        $("<div class='pop'>")
+            .append(
+                $("<img>").attr({ src : imgSrc }),
+                $("<span>").text("close")
+            )
+    )
+});
+
+$("body").on("click", ".pop span", function(){
+    $(".pop").remove();
+});
